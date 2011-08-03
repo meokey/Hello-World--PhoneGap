@@ -30,21 +30,26 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
-	navigator.compass.getCurrentHeading(onSuccess, onError);
+	navigator.compass.getCurrentHeading(onSuccessheading, onError);
         // Update every 3 seconds
         var options = { frequency: 3000 };
-        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        watchID = navigator.geolocation.watchPosition(onSuccesspos, onError, options);
     }
 
     // onSuccess Geolocation
     //
-    function onSuccess(position) {
+    function onSuccesspos(position) {
         var geoelement = document.getElementById('geolocation');
-        geoelement.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
                             'Longitude: ' + position.coords.longitude     + '<br />' +
-                            '<hr />'      + geoelement.innerHTML;
+                            '<hr />'      + element.innerHTML;
+    }
+
+    // onSuccess Heading
+    //
+    function onSuccessheading(heading) {
 	var headelement = document.getElementById('heading');
-        headelement.innerHTML = 'Heading: ' + heading;
+        element.innerHTML = 'Heading: ' + heading+ '<br />' ;
     }
 
     // onError Callback receives a PositionError object
@@ -73,8 +78,8 @@
               <img id="static_map" src="assets/img/staticmap.png">
 		  </div>
 		  <p>This is where you are: </p>
-		  <p id="geolocation">Watching geolocation...</p>
 		  <p id="heading">Heading...</p>
+		  <p id="geolocation">Watching geolocation...</p>
 		  <div class="app_button" id="welcome_button">Go Back</div>
 		</div>
 
