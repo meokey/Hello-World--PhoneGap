@@ -19,27 +19,29 @@
 		
 		<script src="assets/js/dsl.js" type="text/javascript" charset="utf-8"></script>
 		
-		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
 		
 <script type="text/javascript" charset="utf-8">
+    // Wait for PhoneGap to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    var watchID = null;
+
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        // Update every 3 seconds
+        var options = { frequency: 3000 };
+        watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
     }
 
     // onSuccess Geolocation
     //
     function onSuccess(position) {
         var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                            'Longitude: '          + position.coords.longitude             + '<br />' +
-                            'Altitude: '           + position.coords.altitude              + '<br />' +
-                            'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                            'Heading: '            + position.coords.heading               + '<br />' +
-                            'Speed: '              + position.coords.speed                 + '<br />' +
-                            'Timestamp: '          + new Date(position.timestamp)          + '<br />';
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+                            'Longitude: ' + position.coords.longitude     + '<br />' +
+                            '<hr />'      + element.innerHTML;
     }
 
     // onError Callback receives a PositionError object
@@ -49,6 +51,9 @@
               'message: ' + error.message + '\n');
     }
 </script>
+
+
+		<script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
 	<body>
@@ -66,7 +71,7 @@
 		  </div>
 		  <p>This is where you are</p>
 		  <div class="app_button" id="welcome_button">Go Back</div>
-		  <p id="geolocation">Finding geolocation...</p>
+		  <p id="geolocation">Watching geolocation...</p>
 		</div>
 
 		<div id="settings" class="view">
