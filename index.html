@@ -25,24 +25,24 @@
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    var watchID = null;
+    var watchIDPos = null;
+    var watchIDHead = null;
 
     // PhoneGap is ready
     //
     function onDeviceReady() {
-	navigator.compass.getCurrentHeading(onSuccessheading, onError);
         // Update every 3 seconds
         var options = { frequency: 3000 };
-        watchID = navigator.geolocation.watchPosition(onSuccesspos, onError, options);
-    }
+        watchIDPos = navigator.geolocation.watchPosition(onSuccesspos, onError, options);
+	watchIDHead = navigator.compass.watchHeading(onSuccessheading, onError, options);
 
     // onSuccess Geolocation
     //
     function onSuccesspos(position) {
         var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
-                            'Longitude: ' + position.coords.longitude     + '<br />' +
-                            '<hr />'      + element.innerHTML;
+        element.innerHTML = '<hr />'      +
+			    'Latitude: '  + position.coords.latitude      + '<br />' +
+                            'Longitude: ' + position.coords.longitude     + '<br />';
     }
 
     // onSuccess Heading
@@ -58,6 +58,19 @@
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
+
+    // Stop watching the compass
+    //
+    function stopWatch() {
+        if (watchIDHead) {
+            navigator.compass.clearWatch(watchIDHead);
+            watchIDHead = null;
+        }
+        if (watchIDPos) {
+            navigator.geolocation.clearWatch(watchIDPos);
+            watchIDPos = null;
+        }
+    }
 </script>
 
 
@@ -72,6 +85,8 @@
 		  <div class="app_button" id="map_button">Show My Location</div>
   	      <div class="app_button" id="settings_button">Settings</div>
 		</div>
+		<hr/>
+		<button onclick="stopWatch();">Stop Watching</button>
 
 		<div id="map" class="view">
 		  <div class="map_image">
