@@ -27,11 +27,17 @@
 
 		<div id="welcome" class="view">
 
-<script type="text/javascript" charset="utf-8">
-// Wait for PhoneGap to load
-    //
-    document.addEventListener("deviceready", onDeviceReady, false);
+		  <div class="app_button" id="map_button">Show My Location</div>
+  	      <div class="app_button" id="settings_button">Settings</div>
+		</div>
 
+		<div id="map" class="view">
+		  <div class="map_image">
+              <img id="static_map" src="assets/img/staticmap.png">
+		  </div>
+		  <p>This is where you are</p>
+		  <div class="app_button" id="welcome_button">Go Back</div>
+<script type="text/javascript" charset="utf-8">
     // PhoneGap is ready
     //
     function onDeviceReady() {
@@ -58,17 +64,7 @@
         alert('code: '    + error.code    + '\n' +
               'message: ' + error.message + '\n');
     }
-</script><div></div>
-		  <div class="app_button" id="map_button">Show My Location</div>
-  	      <div class="app_button" id="settings_button">Settings</div>
-		</div>
-
-		<div id="map" class="view">
-		  <div class="map_image">
-              <img id="static_map" src="assets/img/staticmap.png">
-		  </div>
-		  <p>This is where you are</p>
-		  <div class="app_button" id="welcome_button">Go Back</div>
+</script>
 		</div>
 
 		<div id="settings" class="view">
