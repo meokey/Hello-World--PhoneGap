@@ -30,10 +30,10 @@
     // PhoneGap is ready
     //
     function onDeviceReady() {
+	navigator.compass.getCurrentHeading(onSuccess, onError);
         // Update every 3 seconds
         var options = { frequency: 3000 };
         watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
-	navigator.compass.getCurrentHeading(onSuccess, onError);
     }
 
     // onSuccess Geolocation
