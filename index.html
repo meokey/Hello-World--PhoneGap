@@ -34,14 +34,15 @@
         // Update every 3 seconds
         var options = { frequency: 3000 };
         watchIDPos = navigator.geolocation.watchPosition(onSuccesspos, onError, options);
+        // Update every 1 seconds
+        var options = { frequency: 1000 };
 	watchIDHead = navigator.compass.watchHeading(onSuccessheading, onError, options);
 
     // onSuccess Geolocation
     //
     function onSuccesspos(position) {
         var element = document.getElementById('geolocation');
-        element.innerHTML = '<hr />'      +
-			    'Latitude: '  + position.coords.latitude      + '<br />' +
+        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
                             'Longitude: ' + position.coords.longitude     + '<br />';
     }
 
@@ -59,7 +60,7 @@
               'message: ' + error.message + '\n');
     }
 
-    // Stop watching the compass
+    // Stop watching the compass and heading
     //
     function stopWatch() {
         if (watchIDHead) {
