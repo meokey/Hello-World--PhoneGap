@@ -39,11 +39,12 @@
     // onSuccess Geolocation
     //
     function onSuccess(position) {
-        var element = document.getElementById('geolocation');
-        element.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
+        var geoelement = document.getElementById('geolocation');
+        geoelement.innerHTML = 'Latitude: '  + position.coords.latitude      + '<br />' +
                             'Longitude: ' + position.coords.longitude     + '<br />' +
-                            'Heading: ' + heading     + '<br />' +
-                            '<hr />'      + element.innerHTML;
+                            '<hr />'      + geoelement.innerHTML;
+	var headelement = document.getElementById('heading');
+        headelement.innerHTML = 'Heading: ' + heading;
     }
 
     // onError Callback receives a PositionError object
@@ -71,9 +72,10 @@
 		  <div class="map_image">
               <img id="static_map" src="assets/img/staticmap.png">
 		  </div>
-		  <p>This is where you are</p>
-		  <div class="app_button" id="welcome_button">Go Back</div>
+		  <p>This is where you are: </p>
 		  <p id="geolocation">Watching geolocation...</p>
+		  <p id="heading">Heading...</p>
+		  <div class="app_button" id="welcome_button">Go Back</div>
 		</div>
 
 		<div id="settings" class="view">
